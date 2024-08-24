@@ -1,8 +1,3 @@
-provider "azurerm" {
-  features {}
-}
-
-
 data "azurerm_key_vault" "master_key_vault" {
   name                = "geppettokeyvault"
   resource_group_name = "management"

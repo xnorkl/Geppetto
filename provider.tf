@@ -25,6 +25,15 @@ terraform {
 
 }
 
+provider "azurerm" {
+  features {
+     key_vault {
+      purge_soft_deleted_certificates_on_destroy = true
+      recover_soft_deleted_certificates          = true
+    }
+  }
+}
+
 provider "azuread" {
   tenant_id       = data.azurerm_key_vault_secret.tenant_id.value
   subscription_id = data.azurerm_key_vault_secret.subscription_id.value
