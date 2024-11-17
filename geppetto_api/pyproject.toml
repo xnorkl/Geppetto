@@ -1,0 +1,62 @@
+[project]
+name = "geppetto-api"
+version = "0.1.0"
+description = "Generative AI tool for creating sock puppet accounts."
+authors = [
+    { name = "Thomas Gordon", email = "gordon@fuzzeverything.com" }
+]
+requires-python = ">=3.9"
+dependencies = [
+    "fastapi>=0.104.0",
+    "uvicorn>=0.24.0",
+    "torch>=2.1.0",
+    "transformers>=4.35.0",
+    "pydantic>=2.4.2",
+    "pydantic-settings>=2.0.3",
+    "python-multipart>=0.0.6",
+    "prometheus-client>=0.19.0",
+    "python-jose[cryptography]>=3.3.0",
+    "tenacity>=8.2.3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.3",
+    "pytest-asyncio>=0.21.1",
+    "black>=23.10.1",
+    "isort>=5.12.0",
+    "mypy>=1.6.1",
+    "ruff>=0.1.3",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/geppetto_api"]
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "I", "N", "W", "B"]
+
+[project.scripts]
+start = "geppetto_api.cli:start"
+test = "pytest:main"
+format = "black:main"
+lint = "ruff.cli:main"
