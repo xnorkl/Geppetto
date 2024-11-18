@@ -9,10 +9,6 @@ app = FastAPI(
     version="0.1.0",
 )
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
 # Add Prometheus metrics endpoint
 metrics_app = make_asgi_app()
 app.mount("/metrics", metrics_app)
